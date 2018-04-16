@@ -1,17 +1,21 @@
-//require http module
 var https = require('https');
 
-function getAndPrintHTML () {
+var requestOptions = {
+  host: 'sytantris.github.io',
+  path: '/http-examples/step3.html'
+};
 
-  var requestOptions = {
-    host: 'sytantris.github.io',
-    path: '/http-examples/step2.html'
+function getAndPrintHTML (options) {
+
+  var requestInputs = {
+    host: options.host,
+    path: options.path
   };
 
-  var chunkData = '' //append to a string.. not sure why
+  var chunkData = '' //append to a string.. to remove chunks
 
   //takes a callback with one parameter - response which is a stream that represents HTTP response
-  https.get(requestOptions, function(response) {
+  https.get(requestInputs, function(response) {
 
     //set encoding of received data to UTF-8
     response.setEncoding('utf-8');
@@ -23,11 +27,14 @@ function getAndPrintHTML () {
         chunkData += data;
 
     });
-    //this end response tells us that we have to stop the function otherwise it will keep running.
     response.on('end', function(){
       console.log(chunkData);
     });
   });
 }
 
-getAndPrintHTML()
+getAndPrintHTML(requestOptions);
+
+
+
+
