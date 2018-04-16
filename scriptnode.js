@@ -4,7 +4,7 @@ var https = require('https');
 function getAndPrintHTMLChunks () {
 
   var requestOption = {
-    host: 'syntantris.github.io', //domain name
+    host: 'sytantris.github.io', //domain name
     path: '/http-examples/step1.html' //path in domain name
   };
 
