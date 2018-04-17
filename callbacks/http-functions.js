@@ -17,13 +17,14 @@ module.exports = function getHTML (options, callback) {
     //the callback is invoked when a `data` chunk is received
     //taking a string, want to have a string at the end
     //this is to pair the chunks to make it easier to manage
-    response.on('data', function (data) {
-        chunkData += data;
-
-    });
     response.on('end', function(){
       callback(chunkData); // this is the invocation
     });
+
+    response.on('data', function (data) {
+        chunkData += data;
+    });
+
   });
 };
 
